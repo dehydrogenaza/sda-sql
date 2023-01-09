@@ -11,6 +11,11 @@ public class Movie {
         this.rating = rating;
     }
 
+    @Override
+    public String toString() {
+        return title + " (" + productionYear + "), " + genre + "\t- ocena: " + rating;
+    }
+
     public static class Builder {
         private static final int MIN_YEAR = 1800;
         private static final int MAX_YEAR = 2100;
@@ -27,7 +32,7 @@ public class Movie {
         public Builder withProductionYear(int productionYear) {
             if (checkYear(productionYear)) {
                 this.productionYear = productionYear;
-            } else throw new IllegalArgumentException("Rok produkcji poza zakresem");
+            } else throw new IllegalArgumentException("Rok produkcji poza zakresem " + MIN_YEAR + " - " + MAX_YEAR);
             return this;
         }
 
@@ -51,22 +56,6 @@ public class Movie {
 
         private boolean checkYear(int year) {
             return year >= MIN_YEAR && year <= MAX_YEAR;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public int getProductionYear() {
-            return productionYear;
-        }
-
-        public Genre getGenre() {
-            return genre;
-        }
-
-        public double getRating() {
-            return rating;
         }
     }
 }
