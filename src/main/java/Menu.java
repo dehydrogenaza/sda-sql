@@ -9,11 +9,12 @@ public class Menu {
     }
 
     public void loop() {
-        while (selectMenuAction()) { }
+        do {
+            System.out.println("1. Dodaj film\n2. Wyświetl filmy\n3. Zakończ");
+        } while (selectMenuAction());
     }
 
     private boolean selectMenuAction() {
-        System.out.println("1. Dodaj film\n2. Wyświetl filmy\n3. Zakończ");
         String input = scanner.nextLine();
 
         switch (input) {
