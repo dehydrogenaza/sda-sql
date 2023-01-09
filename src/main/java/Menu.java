@@ -26,9 +26,20 @@ public class Menu {
     public Movie makeMovieFromInput() {
         Movie.Builder builder = new Movie.Builder();
 
+        parseTitleInput(builder);
+        parseYearInput(builder);
+        parseGenreInput(builder);
+        parseRatingInput(builder);
+
+        return builder.create();
+    }
+
+    private void parseTitleInput(Movie.Builder builder) {
         System.out.println("Podaj tytuł: ");
         builder.withTitle(scanner.nextLine());
+    }
 
+    private void parseYearInput(Movie.Builder builder) {
         while (true) {
             try {
                 System.out.println("Podaj rok produkcji: ");
@@ -39,7 +50,9 @@ public class Menu {
                 System.out.println("Rok produkcji poza zakresem " + Movie.Builder.MIN_YEAR + " - " + Movie.Builder.MAX_YEAR);
             }
         }
+    }
 
+    private void parseGenreInput(Movie.Builder builder) {
         Genre genre;
         try {
             System.out.println("Podaj gatunek: ");
@@ -49,12 +62,13 @@ public class Menu {
             genre = Genre.UNKNOWN_GENRE;
         }
         builder.withGenre(genre);
-        
+    }
 
+    private void parseRatingInput(Movie.Builder builder) {
         System.out.println("Podaj ocenę: ");
         String ratingInput = scanner.nextLine();
-        builder.withRating(Double.parseDouble(ratingInput));
-
-        return builder.create();
+        if (!ratingInput.isBlank()) {
+            builder.withRating(Double.parseDouble(ratingInput));
+        }
     }
 }
