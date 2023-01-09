@@ -1,14 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieStorage {
+public class MovieStorage implements IStorage {
     private final List<Movie> movies = new ArrayList<>();
 
-    public MovieStorage add(Movie f) {
+    @Override
+    public void add(Movie f) {
         movies.add(f);
-        return this;
     }
 
+    @Override
     public void displayAll() {
         movies.forEach(System.out::println);
     }

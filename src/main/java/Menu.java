@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Menu {
     private final Scanner scanner = new Scanner(System.in);
 
-    public boolean menuSelectNextAction(MovieStorage storage) {
+    public boolean menuSelectNextAction(IStorage storage) {
         System.out.println("1. Dodaj film\n2. Wyświetl filmy\n3. Zakończ");
         String input = scanner.nextLine();
 
