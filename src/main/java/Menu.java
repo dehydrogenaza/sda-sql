@@ -8,7 +8,11 @@ public class Menu {
         this.storage = storage;
     }
 
-    public boolean menuSelectNextAction() {
+    public void loop() {
+        while (selectMenuAction()) { }
+    }
+
+    private boolean selectMenuAction() {
         System.out.println("1. Dodaj film\n2. Wyświetl filmy\n3. Zakończ");
         String input = scanner.nextLine();
 
@@ -28,7 +32,7 @@ public class Menu {
         return true;
     }
 
-    public Movie makeMovieFromInput() {
+    private Movie makeMovieFromInput() {
         Movie.Builder builder = new Movie.Builder();
 
         parseTitleInput(builder);
