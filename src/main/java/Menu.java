@@ -29,13 +29,27 @@ public class Menu {
         System.out.println("Podaj tytuł: ");
         builder.withTitle(scanner.nextLine());
 
-        System.out.println("Podaj rok produkcji: ");
-        String yearInput = scanner.nextLine();
-        builder.withProductionYear(Integer.parseInt(yearInput));
+        while (true) {
+            try {
+                System.out.println("Podaj rok produkcji: ");
+                String yearInput = scanner.nextLine();
+                builder.withProductionYear(Integer.parseInt(yearInput));
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Rok produkcji poza zakresem " + Movie.Builder.MIN_YEAR + " - " + Movie.Builder.MAX_YEAR);
+            }
+        }
 
-        System.out.println("Podaj gatunek: ");
-        String genre = scanner.nextLine();
-        builder.withGenre(Genre.valueOf(genre));
+        Genre genre;
+        try {
+            System.out.println("Podaj gatunek: ");
+            genre = Genre.valueOf(scanner.nextLine());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Nieznany gatunek...");
+            genre = Genre.UNKNOWN_GENRE;
+        }
+        builder.withGenre(genre);
+        
 
         System.out.println("Podaj ocenę: ");
         String ratingInput = scanner.nextLine();

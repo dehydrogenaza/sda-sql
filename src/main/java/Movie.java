@@ -17,8 +17,8 @@ public class Movie {
     }
 
     public static class Builder {
-        private static final int MIN_YEAR = 1800;
-        private static final int MAX_YEAR = 2100;
+        public static final int MIN_YEAR = 1800;
+        public static final int MAX_YEAR = 2100;
         private String title;
         private int productionYear;
         private Genre genre;
@@ -29,7 +29,7 @@ public class Movie {
             return this;
         }
 
-        public Builder withProductionYear(int productionYear) {
+        public Builder withProductionYear(int productionYear) throws IllegalArgumentException {
             if (checkYear(productionYear)) {
                 this.productionYear = productionYear;
             } else throw new IllegalArgumentException("Rok produkcji poza zakresem " + MIN_YEAR + " - " + MAX_YEAR);

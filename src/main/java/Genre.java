@@ -2,5 +2,6 @@ public enum Genre {
     HORROR,
     DRAMA,
     COMEDY,
-    SCIFI
+    SCIFI,
+    UNKNOWN_GENRE
 }
