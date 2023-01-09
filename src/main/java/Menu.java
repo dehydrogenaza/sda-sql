@@ -2,8 +2,13 @@ import java.util.Scanner;
 
 public class Menu {
     private final Scanner scanner = new Scanner(System.in);
+    private final IStorage storage;
 
-    public boolean menuSelectNextAction(IStorage storage) {
+    public Menu(IStorage storage) {
+        this.storage = storage;
+    }
+
+    public boolean menuSelectNextAction() {
         System.out.println("1. Dodaj film\n2. Wyświetl filmy\n3. Zakończ");
         String input = scanner.nextLine();
 

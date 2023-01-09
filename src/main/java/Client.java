@@ -1,9 +1,9 @@
 public class Client {
     public static void main(String[] args) {
-        Menu menu = new Menu();
         IStorage storage = new MovieStorage();
+        Menu menu = new Menu(storage);
 
-        while (menu.menuSelectNextAction(storage)) { }
+        while (menu.menuSelectNextAction()) { }
     }
 
 
