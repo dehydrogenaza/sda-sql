@@ -13,6 +13,22 @@ public class Movie {
         this.rating = rating;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public int getProductionYear() {
+        return productionYear;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
     @Override
     public String toString() {
         return title + " (" + productionYear + "), " + genre + "\t- ocena: " + rating;

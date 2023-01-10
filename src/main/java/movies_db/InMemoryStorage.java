@@ -3,7 +3,7 @@ package movies_db;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieStorage implements IStorage {
+public class InMemoryStorage implements IStorage {
     private final List<Movie> movies = new ArrayList<>();
 
     @Override

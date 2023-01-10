@@ -1,4 +1,4 @@
-package jdbc_examples;
+package jdbc_examples.books_db;
 
 public class Book {
     private int id;
