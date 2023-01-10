@@ -1,4 +1,6 @@
-package movies_db;
+package movies_db.storage;
+
+import movies_db.movie.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,5 +16,10 @@ public class InMemoryStorage implements IStorage {
     @Override
     public void displayAll() {
         movies.forEach(System.out::println);
+    }
+
+    @Override
+    public void close() {
+        movies.clear();
     }
 }

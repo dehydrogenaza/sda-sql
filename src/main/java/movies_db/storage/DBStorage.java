@@ -1,4 +1,7 @@
-package movies_db;
+package movies_db.storage;
+
+import movies_db.movie.Genre;
+import movies_db.movie.Movie;
 
 import java.sql.*;
 import java.util.Scanner;
@@ -39,6 +42,15 @@ public class DBStorage implements IStorage {
         try {
             ResultSet movies = readMovies();
             displayResults(movies);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void close() {
+        try {
+            conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

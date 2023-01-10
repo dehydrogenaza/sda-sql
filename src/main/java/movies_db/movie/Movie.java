@@ -1,4 +1,4 @@
-package movies_db;
+package movies_db.movie;
 
 public class Movie {
     private final String title;

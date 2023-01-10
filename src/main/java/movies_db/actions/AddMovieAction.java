@@ -1,37 +1,20 @@
-package movies_db;
+package movies_db.actions;
+
+import movies_db.movie.Genre;
+import movies_db.movie.Movie;
+import movies_db.storage.IStorage;
 
 import java.util.Scanner;
 
-public class Menu {
+public class AddMovieAction extends Action {
     private final Scanner scanner = new Scanner(System.in);
-    private final IStorage storage;
-
-    public Menu(IStorage storage) {
-        this.storage = storage;
+    public AddMovieAction(IStorage storage) {
+        super(storage);
     }
-
-    public void loop() {
-        do {
-            System.out.println("1. Dodaj film\n2. Wyświetl filmy\n3. Zakończ");
-        } while (selectMenuAction());
-    }
-
-    private boolean selectMenuAction() {
-        String input = scanner.nextLine();
-
-        switch (input) {
-            case "1" -> {
-                Movie newMovie = makeMovieFromInput();
-                storage.add(newMovie);
-            }
-            case "2" -> storage.displayAll();
-            case "3" -> {
-                System.out.println("KONIEC");
-                return false;
-            }
-            default -> System.out.println("NIE MA TAKIEJ KOMENDY");
-        }
-
+    @Override
+    public boolean performThenContinue() {
+        Movie newMovie = makeMovieFromInput();
+        storage.add(newMovie);
         return true;
     }
 
@@ -82,5 +65,10 @@ public class Menu {
         if (!ratingInput.isBlank()) {
             builder.withRating(Double.parseDouble(ratingInput));
         }
+    }
+
+    @Override
+    public String getCommand() {
+        return "1";
     }
 }

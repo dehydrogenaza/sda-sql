@@ -1,4 +1,4 @@
-package movies_db;
+package movies_db.movie;
 
 public enum Genre {
     HORROR,
