@@ -1,3 +1,5 @@
+package movies_db;
+
 import java.util.Scanner;
 
 public class Menu {

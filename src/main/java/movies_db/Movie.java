@@ -1,3 +1,5 @@
+package movies_db;
+
 public class Movie {
     private final String title;
     private final int productionYear;
