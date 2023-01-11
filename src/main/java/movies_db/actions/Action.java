@@ -1,13 +1,13 @@
 package movies_db.actions;
 
-import movies_db.storage.IStorage;
-
 abstract public class Action {
-    protected final IStorage storage;
-    public Action(IStorage storage) {
-        this.storage = storage;
+    private final int commandNumber;
+    public Action(int commandNumber) {
+        this.commandNumber = commandNumber;
     }
-
     abstract public boolean performThenContinue();
-    abstract public String getCommand();
+    public String getCommand() {
+        return String.valueOf(commandNumber);
+    }
+    abstract public String getDescription();
 }

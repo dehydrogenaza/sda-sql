@@ -1,20 +1,17 @@
 package movies_db.actions;
 
-import movies_db.movie.Genre;
-import movies_db.movie.Movie;
-import movies_db.storage.IStorage;
+import movies_db.movie.*;
+import movies_db.storage.StorageManager;
 
 import java.util.Scanner;
 
 public class AddMovieAction extends Action {
     private final Scanner scanner = new Scanner(System.in);
-    public AddMovieAction(IStorage storage) {
-        super(storage);
-    }
+    public AddMovieAction(int commandNumber) { super(commandNumber); }
     @Override
     public boolean performThenContinue() {
         Movie newMovie = makeMovieFromInput();
-        storage.add(newMovie);
+        StorageManager.getStorage().add(newMovie);
         return true;
     }
 
@@ -68,7 +65,7 @@ public class AddMovieAction extends Action {
     }
 
     @Override
-    public String getCommand() {
-        return "1";
+    public String getDescription() {
+        return "Dodaj film";
     }
 }

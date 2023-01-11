@@ -1,20 +1,18 @@
 package movies_db.actions;
 
-import movies_db.storage.IStorage;
+import movies_db.storage.StorageManager;
 
 public class DisplayMoviesAction extends Action {
-    public DisplayMoviesAction(IStorage storage) {
-        super(storage);
-    }
+    public DisplayMoviesAction(int commandNumber) { super(commandNumber); }
 
     @Override
     public boolean performThenContinue() {
-        storage.displayAll();
+        StorageManager.getStorage().displayAll();
         return true;
     }
 
     @Override
-    public String getCommand() {
-        return "2";
+    public String getDescription() {
+        return "Wyświetl filmy";
     }
 }

@@ -1,37 +1,26 @@
 package movies_db.ui;
 
-import movies_db.actions.Action;
-import movies_db.actions.AddMovieAction;
-import movies_db.actions.DisplayMoviesAction;
-import movies_db.actions.EndProgramAction;
-import movies_db.storage.IStorage;
+import movies_db.actions.*;
+import movies_db.storage.StorageManager;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Menu {
     private final Scanner scanner = new Scanner(System.in);
-    private final IStorage storage;
-    private final Map<String, Action> menuActions = new HashMap<>();
+    private final Map<String, Action> menuActions;
 
-    public Menu(IStorage storage) {
-        this.storage = storage;
-
-        Action add = new AddMovieAction(storage);
-        Action display = new DisplayMoviesAction(storage);
-        Action end = new EndProgramAction(storage);
-
-        menuActions.put(add.getCommand(), add);
-        menuActions.put(display.getCommand(), display);
-        menuActions.put(end.getCommand(), end);
+    public Menu(Action... actions) {
+        menuActions = Arrays.stream(actions).collect(Collectors.toMap(Action::getCommand, action -> action));
     }
 
     public void loop() {
         do {
-            System.out.println("1. Dodaj film\n2. Wyświetl filmy\n3. Zakończ");
+            System.out.println(getOptionsList());
         } while (selectMenuAction());
-        storage.close();
+        StorageManager.close();
     }
 
     private boolean selectMenuAction() {
@@ -41,7 +30,17 @@ public class Menu {
             Action action = menuActions.get(input);
             return action.performThenContinue();
         }
+
         System.out.println("NIE MA TAKIEJ KOMENDY");
         return true;
+    }
+
+    private String getOptionsList() {
+        StringBuilder sb = new StringBuilder();
+        menuActions.forEach((k, v) -> sb.append(k)
+                .append(". ")
+                .append(v.getDescription())
+                .append("\n"));
+        return sb.toString();
     }
 }

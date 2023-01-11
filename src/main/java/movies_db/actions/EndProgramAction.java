@@ -1,11 +1,7 @@
 package movies_db.actions;
 
-import movies_db.storage.IStorage;
-
 public class EndProgramAction extends Action {
-    public EndProgramAction(IStorage storage) {
-        super(storage);
-    }
+    public EndProgramAction(int commandNumber) { super(commandNumber); }
 
     @Override
     public boolean performThenContinue() {
@@ -14,7 +10,7 @@ public class EndProgramAction extends Action {
     }
 
     @Override
-    public String getCommand() {
-        return "3";
+    public String getDescription() {
+        return "Zakończ program";
     }
 }
