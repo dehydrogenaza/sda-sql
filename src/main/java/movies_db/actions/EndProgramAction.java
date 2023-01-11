@@ -1,11 +1,14 @@
 package movies_db.actions;
 
+import movies_db.ui.UI;
+
 public class EndProgramAction extends Action {
     public EndProgramAction(int commandNumber) { super(commandNumber); }
 
     @Override
     public boolean performThenContinue() {
-        System.out.println("KONIEC");
+        UI.display("KONIEC");
+//        System.out.println("KONIEC");
         return false;
     }
 

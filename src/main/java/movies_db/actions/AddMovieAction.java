@@ -2,11 +2,9 @@ package movies_db.actions;
 
 import movies_db.movie.*;
 import movies_db.storage.StorageManager;
-
-import java.util.Scanner;
+import movies_db.ui.UI;
 
 public class AddMovieAction extends Action {
-    private final Scanner scanner = new Scanner(System.in);
     public AddMovieAction(int commandNumber) { super(commandNumber); }
     @Override
     public boolean performThenContinue() {
@@ -27,19 +25,17 @@ public class AddMovieAction extends Action {
     }
 
     private void parseTitleInput(Movie.Builder builder) {
-        System.out.println("Podaj tytuł: ");
-        builder.withTitle(scanner.nextLine());
+        builder.withTitle(UI.ask("Podaj tytuł: "));
     }
 
     private void parseYearInput(Movie.Builder builder) {
         while (true) {
             try {
-                System.out.println("Podaj rok produkcji: ");
-                String yearInput = scanner.nextLine();
+                String yearInput = UI.ask("Podaj rok produkcji: ");
                 builder.withProductionYear(Integer.parseInt(yearInput));
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println("Rok produkcji poza zakresem " + Movie.Builder.MIN_YEAR + " - " + Movie.Builder.MAX_YEAR);
+                UI.display("Rok produkcji poza zakresem " + Movie.Builder.MIN_YEAR + " - " + Movie.Builder.MAX_YEAR);
             }
         }
     }
@@ -47,18 +43,16 @@ public class AddMovieAction extends Action {
     private void parseGenreInput(Movie.Builder builder) {
         Genre genre;
         try {
-            System.out.println("Podaj gatunek: ");
-            genre = Genre.valueOf(scanner.nextLine());
+            genre = Genre.valueOf(UI.ask("Podaj gatunek: "));
         } catch (IllegalArgumentException e) {
-            System.out.println("Nieznany gatunek...");
+            UI.display("Nieznany gatunek...");
             genre = Genre.UNKNOWN_GENRE;
         }
         builder.withGenre(genre);
     }
 
     private void parseRatingInput(Movie.Builder builder) {
-        System.out.println("Podaj ocenę: ");
-        String ratingInput = scanner.nextLine();
+        String ratingInput = UI.ask("Podaj ocenę: ");
         if (!ratingInput.isBlank()) {
             builder.withRating(Double.parseDouble(ratingInput));
         }

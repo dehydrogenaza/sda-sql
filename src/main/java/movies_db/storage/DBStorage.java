@@ -2,9 +2,9 @@ package movies_db.storage;
 
 import movies_db.movie.Genre;
 import movies_db.movie.Movie;
+import movies_db.ui.UI;
 
 import java.sql.*;
-import java.util.Scanner;
 
 public class DBStorage implements IStorage {
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/movies";
@@ -89,7 +89,7 @@ public class DBStorage implements IStorage {
                     .withGenre(Genre.valueOf(genre))
                     .withRating(rating)
                     .create();
-            System.out.println(movie);
+            UI.display(movie);
         }
     }
 
@@ -98,8 +98,6 @@ public class DBStorage implements IStorage {
     }
 
     private String getDBPassword() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Podaj hasło: ");
-        return sc.nextLine();
+        return UI.ask("Podaj hasło: ");
     }
 }

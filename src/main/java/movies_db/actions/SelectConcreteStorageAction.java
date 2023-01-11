@@ -1,6 +1,7 @@
 package movies_db.actions;
 
 import movies_db.storage.*;
+import movies_db.ui.UI;
 
 public class SelectConcreteStorageAction extends Action {
     private final StorageType storageType;
@@ -12,7 +13,7 @@ public class SelectConcreteStorageAction extends Action {
     @Override
     public boolean performThenContinue() {
         if (StorageManager.getStorage().getClass().getSimpleName().equals(storageType.className)) {
-            System.out.println("(wybrano obecnie używaną metodę zapisu, brak zmian)");
+            UI.display("(wybrano obecnie używaną metodę zapisu, brak zmian)");
         } else {
             StorageManager.setStorage(storageType.createStorage());
         }
