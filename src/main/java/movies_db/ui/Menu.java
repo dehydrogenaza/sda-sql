@@ -1,7 +1,6 @@
 package movies_db.ui;
 
 import movies_db.actions.*;
-import movies_db.storage.StorageManager;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -20,7 +19,6 @@ public class Menu {
         do {
             System.out.println(getOptionsList());
         } while (selectMenuAction());
-        StorageManager.close();
     }
 
     private boolean selectMenuAction() {

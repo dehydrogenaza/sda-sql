@@ -1,6 +1,7 @@
 package movies_db;
 
 import movies_db.actions.*;
+import movies_db.storage.StorageManager;
 import movies_db.ui.Menu;
 
 public class Client {
@@ -12,5 +13,6 @@ public class Client {
 
         Menu mainMenu = new Menu(add, display, chooseStorage, end);
         mainMenu.loop();
+        StorageManager.close();
     }
 }

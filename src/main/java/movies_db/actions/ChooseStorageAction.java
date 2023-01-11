@@ -8,9 +8,14 @@ public class ChooseStorageAction extends Action {
 
     @Override
     public boolean performThenContinue() {
-        Action chooseMemory = new SelectConcreteStorageAction(1, StorageType.IN_MEMORY);
-        Action chooseDB = new SelectConcreteStorageAction(2, StorageType.DATABASE);
-        Menu storageMenu = new Menu(chooseMemory, chooseDB);
+        StorageType[] values = StorageType.values();
+        Action[] storageActions = new Action[values.length];
+        for (int i = 0; i < values.length; i++) {
+            StorageType type = values[i];
+            storageActions[i] = new SelectConcreteStorageAction(i + 1, type);
+        }
+
+        Menu storageMenu = new Menu(storageActions);
         storageMenu.loop();
         return true;
     }
