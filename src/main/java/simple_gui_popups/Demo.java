@@ -1,7 +1,7 @@
 package simple_gui_popups;
 
 import javax.swing.*;
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class Demo {
     public static void main(String[] args) {

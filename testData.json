@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Skazani na Shawshank",
+    "productionYear": 1994,
+    "genre": "DRAMA",
+    "rating": 9.2
+  },
+  {
+    "title": "Żywot Briana",
+    "productionYear": 1979,
+    "genre": "COMEDY",
+    "rating": 8.0
+  },
+  {
+    "title": "Obcy",
+    "productionYear": 1979,
+    "genre": "HORROR",
+    "rating": 8.4
+  },
+  {
+    "title": "Gwiezdne Wojny: Imperium Kontratakuje",
+    "productionYear": 1980,
+    "genre": "SCIFI",
+    "rating": 8.7
+  },
+  {
+    "title": "Pulp Fiction",
+    "productionYear": 1994,
+    "genre": "COMEDY",
+    "rating": 8.8
+  },
+  {
+    "title": "Ojciec Chrzestny",
+    "productionYear": 1972,
+    "genre": "DRAMA",
+    "rating": 9.2
+  }
+]
