@@ -1,0 +1,24 @@
+-- DELETE
+usuwanie niektórych
+DELETE FROM books WHERE id BETWEEN 7 AND 14
+
+-- TRUNCATE
+kasuje wszystkie wpisy z tabeli
+wydajniejsze od DELETE bez where
+TRUNCATE TABLE books
+
+
+-- DROP
+usuwa całą tabelę z zawartością
+DROP TABLE books
+
+
+
+Tranzakcje:
+- jeśli używamy Sesji z .getCurrentSession() to za zamknięcie sesji odpowiedzialne jest SessionFactory, ale pozwala to używać istniejących jeszcze (wcześniejszych) sesji
+- .openSession() wymaga zapisu <property name="current_session_context_class">thread</property> i pool size
+- jeśli używamy session.save() powinniśmy zamykać sesję session.close() lub synchronizować z użyciem session.flush()
+- jeśli używamy transaction.commit() to .flush() już jest robiony, nie musimy ręcznie dodawać
+- generalnie lepiej robić Tranzakcje
+- przy kaskadowości: Tranzakcje, jeśli zrobimy .save() bez .flush() to nie zadziała
+- Tranzakcje są bezpieczniejsze wobec wyjątków, bo są atomowe (save nie jest)

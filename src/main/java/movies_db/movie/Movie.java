@@ -1,12 +1,26 @@
 package movies_db.movie;
 
-public class Movie {
-    private final String title;
-    private final int productionYear;
-    private final Genre genre;
-    private final double rating;
+import javax.persistence.*;
 
-    Movie(String title, int productionYear, Genre genre, double rating) {
+@Entity
+@Table(name = "movies")
+public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "title")
+    private String title;
+    @Column(name = "productionYear")
+    private int productionYear;
+    @Column(name = "genre")
+    @Enumerated(EnumType.STRING)
+    private Genre genre;
+    @Column(name = "rating")
+    private double rating;
+
+    public Movie() {} //required by Hibernate
+
+    private Movie(String title, int productionYear, Genre genre, double rating) {
         this.title = title;
         this.productionYear = productionYear;
         this.genre = genre;
@@ -27,6 +41,30 @@ public class Movie {
 
     public double getRating() {
         return rating;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setProductionYear(int productionYear) {
+        this.productionYear = productionYear;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override

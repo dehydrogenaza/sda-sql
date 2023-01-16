@@ -12,10 +12,10 @@ public class SelectConcreteStorageAction extends Action {
 
     @Override
     public boolean performThenContinue() {
-        if (StorageManager.getStorage().getClass().getSimpleName().equals(storageType.className)) {
+        if (StorageManager.getStorage().getClass().getSimpleName().equals(storageType.storageClassName)) {
             UI.display("(wybrano obecnie używaną metodę zapisu, brak zmian)");
         } else {
-            StorageManager.setStorage(storageType.createStorage());
+            StorageManager.setStorage(storageType);
         }
         return false;
     }

@@ -1,8 +1,16 @@
 package movies_db.storage;
 public class StorageManager {
     private IStorage storage;
+    private static StorageType INITIAL_STORAGE = StorageType.IN_MEMORY;
     private StorageManager() {
-        storage = new InMemoryStorage();
+//        storage = new InMemoryStorage();
+        //storage = new HibernateStorage();
+//        storage = new JDBCStorage();
+        storage = INITIAL_STORAGE.createStorage();
+    }
+
+    private StorageManager(IStorage storage) {
+        this.storage = storage;
     }
 
     private static class Holder {
@@ -21,8 +29,8 @@ public class StorageManager {
         instance().storage.close();
     }
 
-    public static void setStorage(IStorage newStorage) {
+    public static void setStorage(StorageType newStorage) {
         close();
-        instance().storage = newStorage;
+        instance().storage = newStorage.createStorage();
     }
 }

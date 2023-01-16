@@ -2,18 +2,18 @@ package movies_db.storage;
 
 import movies_db.movie.Genre;
 import movies_db.movie.Movie;
-import movies_db.ui.UI;
 
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
-public class DBStorage implements IStorage {
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/movies";
-    private static final String DATABASE_LOGIN = "root";
+public class JDBCStorage extends GenericDBStorage implements IStorage {
     private static final String ADD_MOVIE_QUERY_TEMPLATE =
             "INSERT INTO movies(title, productionYear, genre, rating) VALUES (?,?,?,?);";
     private final Connection conn;
 
-    public DBStorage() {
+    public JDBCStorage() {
+        super();
         String password = getDBPassword();
         try {
             conn = establishDBConnection(password);
@@ -75,13 +75,13 @@ public class DBStorage implements IStorage {
         return conn.createStatement().executeQuery(selectAllSql);
     }
 
-    private void displayResults(ResultSet movies) throws SQLException {
-        while (movies.next()) {
-            //int id = movies.getInt("id");
-            String title = movies.getString("title");
-            int productionYear = movies.getInt("productionYear");
-            String genre = movies.getString("genre");
-            double rating = movies.getDouble("rating");
+    private void displayResults(ResultSet movieResults) throws SQLException {
+        List<Movie> moviesList = new LinkedList<>();
+        while (movieResults.next()) {
+            String title = movieResults.getString("title");
+            int productionYear = movieResults.getInt("productionYear");
+            String genre = movieResults.getString("genre");
+            double rating = movieResults.getDouble("rating");
 
             Movie movie = new Movie.Builder()
                     .withTitle(title)
@@ -89,15 +89,13 @@ public class DBStorage implements IStorage {
                     .withGenre(Genre.valueOf(genre))
                     .withRating(rating)
                     .create();
-            UI.display(movie);
+
+            moviesList.add(movie);
         }
+        concatenateResultsAndDisplay(moviesList);
     }
 
     private Connection establishDBConnection(String password) throws SQLException {
         return DriverManager.getConnection(DATABASE_URL, DATABASE_LOGIN, password);
-    }
-
-    private String getDBPassword() {
-        return UI.ask("Podaj hasło: ");
     }
 }
