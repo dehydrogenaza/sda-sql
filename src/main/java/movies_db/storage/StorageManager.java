@@ -9,10 +9,6 @@ public class StorageManager {
         storage = INITIAL_STORAGE.createStorage();
     }
 
-    private StorageManager(IStorage storage) {
-        this.storage = storage;
-    }
-
     private static class Holder {
         private static final StorageManager INSTANCE = new StorageManager();
     }
@@ -32,5 +28,9 @@ public class StorageManager {
     public static void setStorage(StorageType newStorage) {
         close();
         instance().storage = newStorage.createStorage();
+    }
+
+    public static void setInitialStorage(StorageType initialStorage) {
+        INITIAL_STORAGE = initialStorage;
     }
 }
